@@ -1,7 +1,12 @@
 ---
-import Navigation from "../components/NavigationDesktop.astro";
+import Header from "../components/Header.astro";
+const props = Astro.props;
 
-const pageTitle = "About me | victorvazquez.dev";
+let pageTitle = "victorvazquez.dev";
+
+if (props.pageTitle) {
+  pageTitle = `${props.pageTitle} | victorvazquez.dev`;
+}
 ---
 
 <html lang="en">
@@ -12,8 +17,10 @@ const pageTitle = "About me | victorvazquez.dev";
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
   </head>
-  <body>
-    <Navigation />
-    <h1>About me</h1>
+  <body class="bg-black text-white">
+    <Header />
+    <main class="p-4">
+      <slot />
+    </main>
   </body>
 </html>
