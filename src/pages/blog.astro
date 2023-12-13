@@ -1,23 +1,13 @@
 ---
-import Navigation from "../components/NavigationDesktop.astro";
+import Title from "../components/ui/Title.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-  <head>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Blog | victorvazquez.dev</title>
-  </head>
-  <body>
-    <Navigation />
-
-    <h1>My Astro Learning Blog</h1>
-    <p>This is where I will post about my journey learning Astro.</p>
-    <ul>
-      <li><a href="/posts/post-1/">Post 1</a></li>
-      <li><a href="/posts/post-2/">Post 2</a></li>
-      <li><a href="/posts/post-3/">Post 3</a></li>
-    </ul>
-  </body>
-</html>
+<BaseLayout pageTitle="Blog">
+  <Title>My blog entries</Title>
+  <ul>
+    <li><a href="/posts/post-1/">Post 1</a></li>
+    <li><a href="/posts/post-2/">Post 2</a></li>
+    <li><a href="/posts/post-3/">Post 3</a></li>
+  </ul>
+</BaseLayout>
