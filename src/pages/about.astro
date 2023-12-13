@@ -1,19 +1,10 @@
 ---
-import Navigation from "../components/NavigationDesktop.astro";
-
-const pageTitle = "About me | victorvazquez.dev";
+import Title from "../components/ui/Title.astro";
+import Text from "../components/ui/Text.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
-  </head>
-  <body>
-    <Navigation />
-    <h1>About me</h1>
-  </body>
-</html>
+<BaseLayout pageTitle="About me">
+  <Title>About me</Title>
+  <Text>Page under construction...</Text>
+</BaseLayout>
