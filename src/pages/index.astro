@@ -1,8 +1,22 @@
 ---
+import DownloadCV from "../components/DownloadCV.astro";
+import Link from "../components/ui/Link.astro";
+import Text from "../components/ui/Text.astro";
 import Title from "../components/ui/Title.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
 	<Title>Hello, world!</Title>
+
+	<DownloadCV />
+
+	<Text>
+		I'm Victor Vazquez, a Software Developer primarily focused on Web
+		Development. I have 3 years of experience working on Web Development mainly
+		with React and Node.js. Currently I'm working in <span
+			><Link href="https://tgoat.org">tgoat.org</Link></span
+		> as Software Developer were I plan and developed the MVP of tgoat.org as
+		well as the previous versions alongside a team of 3 developers.
+	</Text>
 </BaseLayout>
