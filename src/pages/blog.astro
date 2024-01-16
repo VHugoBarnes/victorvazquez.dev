@@ -10,10 +10,10 @@ const posts = await Astro.glob<Post>("../pages/posts/*.md*");
 <BaseLayout pageTitle="Blog">
   <Title>Blog entries</Title>
 
-  <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  <ul class="gap-4 colums-1 md:columns-2 lg:columns-3">
     {
       posts.map((post) => (
-        <li>
+        <li class="mb-4">
           <PostCard
             href={post.url}
             title={post.frontmatter.title}

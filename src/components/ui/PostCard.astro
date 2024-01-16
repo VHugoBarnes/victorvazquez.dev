@@ -18,26 +18,27 @@ const { href, title, description, imageUrl, imageAlt, uploadedAt, tags } =
   Astro.props;
 ---
 
-<a
-  href={href}
-  class="block rounded-xl shadow-xl space-y-2 bg-neutral-800 w-auto"
->
-  <Image
-    src={imageUrl}
-    alt={imageAlt}
-    width={500}
-    height={200}
-    class="rounded-t-xl"
-  />
+<div class="block rounded-xl shadow-xl space-y-2 bg-neutral-800 w-auto h-auto">
+  <a href={href}>
+    <Image
+      src={imageUrl}
+      alt={imageAlt}
+      width={500}
+      height={200}
+      class="rounded-t-xl"
+    />
+  </a>
   <div class="space-y-2 p-4">
     <Subtitle>
-      {title}
+      <a href={href} class="hover:underline">
+        {title}
+      </a>
     </Subtitle>
     <Text>
       {description}
     </Text>
-    <div>
+    <div class="grid grid-cols-3">
       {tags.map((tag: string) => <Tag>{tag}</Tag>)}
     </div>
   </div>
-</a>
+</div>
