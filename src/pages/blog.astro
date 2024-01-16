@@ -1,10 +1,30 @@
 ---
-import Text from "../components/ui/Text.astro";
+import PostCard from "../components/ui/PostCard.astro";
 import Title from "../components/ui/Title.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import type { Post } from "../interfaces/post.interface";
+
+const posts = await Astro.glob<Post>("../pages/posts/*.md*");
 ---
 
 <BaseLayout pageTitle="Blog">
   <Title>Blog entries</Title>
-  <Text>Page under construction...</Text>
+
+  <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {
+      posts.map((post) => (
+        <li>
+          <PostCard
+            href={post.url}
+            title={post.frontmatter.title}
+            description={post.frontmatter.description}
+            imageUrl={post.frontmatter.image.url}
+            imageAlt={post.frontmatter.image.alt}
+            uploadedAt={post.frontmatter.pubDate}
+            tags={post.frontmatter.tags}
+          />
+        </li>
+      ))
+    }
+  </ul>
 </BaseLayout>

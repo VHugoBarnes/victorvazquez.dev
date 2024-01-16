@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+import Subtitle from "./Subtitle.astro";
+import Text from "./Text.astro";
+import Tag from "./Tag.astro";
+
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  imageAlt: string;
+  uploadedAt: Date;
+  tags: string[];
+}
+
+const { href, title, description, imageUrl, imageAlt, uploadedAt, tags } =
+  Astro.props;
+---
+
+<a
+  href={href}
+  class="block rounded-xl shadow-xl space-y-2 bg-neutral-800 w-auto"
+>
+  <Image
+    src={imageUrl}
+    alt={imageAlt}
+    width={500}
+    height={200}
+    class="rounded-t-xl"
+  />
+  <div class="space-y-2 p-4">
+    <Subtitle>
+      {title}
+    </Subtitle>
+    <Text>
+      {description}
+    </Text>
+    <div>
+      {tags.map((tag: string) => <Tag>{tag}</Tag>)}
+    </div>
+  </div>
+</a>

@@ -4,7 +4,9 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-  <p>Written by <span class="font-bold">{frontmatter.author}</span></p>
+  <p class="text-right">
+    Written by <span class="font-bold">{frontmatter.author}</span>
+  </p>
   <div class="space-y-2">
     <slot />
   </div>
