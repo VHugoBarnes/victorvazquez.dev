@@ -1,22 +1,29 @@
 ---
 import DownloadCV from "../components/DownloadCV.astro";
-import Link from "../components/ui/Link.astro";
+import Subtitle from "../components/ui/Subtitle.astro";
 import Text from "../components/ui/Text.astro";
 import Title from "../components/ui/Title.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
-	<Title>Hello, world! 🌎</Title>
+	<div class="space-y-8">
+		<Title>Hello, world! 🌎</Title>
 
-	<DownloadCV />
+		<DownloadCV />
 
-	<Text>
-		I'm Victor Vazquez, a Software Developer primarily focused on Fullstack Web
-		Development. I have 3 years of experience working on Web Development mainly
-		with React and Node.js. Currently I'm working in <span
-			><Link href="https://tgoat.org">tgoat.org</Link></span
-		> as Fullstack Software Developer were I plan and developed the MVP of tgoat.org
-		as well as the previous versions alongside a team of 3 developers.
-	</Text>
+		<div class="md:w-1/2">
+			<Text size="text-3xl" className="leading-relaxed">
+				<span class="font-bold text-rose-400">Fullstack Web Developer</span> with
+				<span class="font-bold text-indigo-400">3+ years of experience</span>.
+				From Tamaulipas, Mexico.
+			</Text>
+		</div>
+	</div>
+
+	<div class="space-y-8">
+		<Subtitle>Projects 🧑🏾‍💻</Subtitle>
+
+		<Text className="font-bold" size="text-2xl">tgoat.org</Text>
+	</div>
 </BaseLayout>
