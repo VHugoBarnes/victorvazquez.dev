@@ -37,7 +37,7 @@ const { href, title, description, imageUrl, imageAlt, uploadedAt, tags } =
     <Text>
       {description}
     </Text>
-    <div class="grid grid-cols-3">
+    <div class="flex flex-wrap gap-2">
       {tags.map((tag: string) => <Tag>{tag}</Tag>)}
     </div>
   </div>
