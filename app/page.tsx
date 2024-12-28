@@ -259,7 +259,7 @@ export default function Component() {
   )
 
   return (
-    <div className="container mx-auto p-4 h-screen flex flex-col bg-background text-foreground">
+    <div className="container mx-auto p-4 h-dvh flex flex-col bg-background text-foreground">
       <div className="bg-background border rounded-t-lg p-2 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className="flex space-x-2">
