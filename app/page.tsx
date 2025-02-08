@@ -25,6 +25,8 @@ export default function Component() {
 
   useEffect(() => {
     setMounted(true)
+    setActiveFolder('about')
+    setActiveFile({ type: 'profile', content: developer.bio })
   }, [])
 
   const developer = {
@@ -33,16 +35,21 @@ export default function Component() {
     email: "hugovg799@gmail.com",
     github: "https://github.com/vhugobarnes",
     linkedin: "https://www.linkedin.com/in/v%C3%ADctor-hugo-v%C3%A1zquez-g%C3%B3mez-5882a1171/",
-    bio: "As a passionate Full Stack Web Developer, I bring over 3 years of experience dedicated to crafting dynamic and user-centric web solutions. Proficient in modern web development technologies, I specialize in creating applications with attention to detail and a proactive approach that ensures organized and responsible project execution.",
+    bio: "As a passionate Full Stack Web Developer, I bring over 4 years of experience dedicated to crafting dynamic and user-centric web solutions. Proficient in modern web development technologies, I specialize in creating applications with attention to detail and a proactive approach that ensures organized and responsible project execution.",
     skills: [
       { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
       { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
       { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
       { name: "Vue", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" },
       { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+      { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+      { name: "CodeIgniter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/codeigniter/codeigniter-plain-wordmark.svg" },
+      { name: "Laravel", icon: "https://raw.githubusercontent.com/devicons/devicon/6910f0503efdd315c8f9b858234310c06e04d9c0/icons/laravel/laravel-line-wordmark.svg" },
+      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
       { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
       { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
       { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+      { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
       { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
       { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
     ],
@@ -68,6 +75,8 @@ export default function Component() {
         company: "Ticketero",
         position: "Fullstack Web Developer",
         period: "February 2024 - Present",
+        startDate: "2024-02-01",
+        endDate: null,
         description: `
           As a FullStack Web Engineer at Ticketero, I focus on developing new modules and enhancing the user
           experience and interface in close collaboration with a designer. My work involves utilizing PHP frameworks
@@ -80,6 +89,8 @@ export default function Component() {
         company: "tgoat",
         position: "Lead Fullstack Developer",
         period: "June 2021 - March 2024",
+        startDate: "2021-06-01",
+        endDate: "2024-03-01",
         description: `
           In my role as a Fullstack Web Engineer, I spearheaded the design and development of the website
           architecture, collaborating closely with stakeholders to ensure a user-friendly experience. My responsibilities
@@ -95,6 +106,8 @@ export default function Component() {
         company: "National Technological Institute of Mexico",
         position: "Backend Developer",
         period: "January 2021 - June 2021",
+        startDate: "2021-01-01",
+        endDate: "2021-06-20",
         description: `
           During my university tenure, I actively participated in the Social Service program, where I collaborated
           with fellow students to initiate the development of an Integral Information System tailored for the
@@ -187,14 +200,30 @@ export default function Component() {
 
   const ExperienceContent = () => (
     <div className="space-y-2">
-      {developer.workExperience.map((job, index) => (
-        <FileIcon
+      {developer.workExperience.map((job, index) => {
+        const jobStartDate = new Date(job.startDate)
+        const jobEndDate = job.endDate ? new Date(job.endDate) : new Date()
+        const totalMonths = Math.floor((jobEndDate.getTime() - jobStartDate.getTime()) / (1000 * 60 * 60 * 24 * 30))
+        const jobDurationInYears = Math.floor(totalMonths / 12)
+        const jobDurationInMonthsRemainder = totalMonths % 12
+
+        let jobDurationParts: string[] = []
+        if (jobDurationInYears > 0) {
+          jobDurationParts.push(`${jobDurationInYears} year${jobDurationInYears > 1 ? 's' : ''}`)
+        }
+        if (jobDurationInMonthsRemainder > 0) {
+          jobDurationParts.push(`${jobDurationInMonthsRemainder} month${jobDurationInMonthsRemainder > 1 ? 's' : ''}`)
+        }
+        // Si ambos son 0, se muestra 0 month
+        const jobDuration = jobDurationParts.length > 0 ? jobDurationParts.join(' ') : '0 month'
+
+        return <FileIcon
           key={index}
-          name={job.company}
+          name={`${job.company} - ${job.position} (${jobDuration})`}
           icon={Briefcase}
           onClick={() => setActiveFile({ type: 'experience', content: job })}
         />
-      ))}
+      })}
     </div>
   )
 
@@ -217,10 +246,27 @@ export default function Component() {
           </div>
         )
       case 'experience':
+        const jobStartDate = new Date(file.content.startDate)
+        const jobEndDate = file.content.endDate ? new Date(file.content.endDate) : new Date()
+        const totalMonths = Math.floor((jobEndDate.getTime() - jobStartDate.getTime()) / (1000 * 60 * 60 * 24 * 30))
+        const jobDurationInYears = Math.floor(totalMonths / 12)
+        const jobDurationInMonthsRemainder = totalMonths % 12
+
+        let jobDurationParts: string[] = []
+        if (jobDurationInYears > 0) {
+          jobDurationParts.push(`${jobDurationInYears} year${jobDurationInYears > 1 ? 's' : ''}`)
+        }
+        if (jobDurationInMonthsRemainder > 0) {
+          jobDurationParts.push(`${jobDurationInMonthsRemainder} month${jobDurationInMonthsRemainder > 1 ? 's' : ''}`)
+        }
+        const jobDurationInYearsAndMonths = jobDurationParts.length > 0 ? jobDurationParts.join(' ') : '0 month'
+
         return (
           <div className="space-y-2">
             <h3 className="text-lg font-semibold">{file.content.position}</h3>
-            <p className="text-sm font-medium">{file.content.company} | {file.content.period}</p>
+            <p className="text-sm font-medium">
+              {file.content.company} | {file.content.period} ({jobDurationInYearsAndMonths})
+            </p>
             <p className="text-sm" dangerouslySetInnerHTML={{ __html: file.content.description }}></p>
           </div>
         )
